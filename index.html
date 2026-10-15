@@ -29,6 +29,61 @@ body{padding-left:268px;background:var(--bg);font-size:14px}.app-sidebar{positio
 
 .memory-card{height:100%}.memory-card h3{margin-bottom:9px}.memory-card .subline{font-size:12px;color:var(--muted);margin:0 0 14px}.formula{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 13px;font-size:12px;line-height:1.65;color:var(--text);overflow:auto}.formula strong{color:var(--brand)}.assumption-list{display:grid;gap:8px;list-style:none;padding:0;margin:0}.assumption-list li{display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.52}.assumption-list li:before{content:'•';color:var(--brand);font-size:18px;line-height:12px}.memory-table table{min-width:760px}.memory-table th,.memory-table td{padding:11px 12px}.memory-table td:nth-child(n+2){font-variant-numeric:tabular-nums}.memory-table .base-row{background:var(--brandsoft)!important}.memory-table .sensitivity-row{background:var(--ambersoft)!important}.memory-table .warning-row{background:var(--redsoft)!important}.memory-badge{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:850;letter-spacing:.25px;text-transform:uppercase;background:var(--brandsoft);color:var(--brand)}.memory-badge.warn{background:var(--ambersoft);color:var(--amber)}.memory-badge.alert{background:var(--redsoft);color:var(--red)}.memory-conclusion{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--border);background:var(--surface2);border-radius:13px;padding:15px 16px;font-size:13px;line-height:1.6}.memory-conclusion .icon{color:var(--brand);margin-top:1px}
 
+
+/* Mobile-only layout and accessible lateral navigation. */
+.mobile-menu-toggle,.mobile-menu-close,.mobile-backdrop{display:none}
+@media screen and (max-width:970px){
+ body{padding-left:0}
+ body.menu-open{overflow:hidden}
+ .topbar{position:sticky;top:0;z-index:32}
+ .top-inner{justify-content:space-between;min-height:64px;gap:12px}
+ .mobile-menu-toggle,.mobile-menu-close{display:inline-flex;align-items:center;gap:8px;min-height:44px}
+ .mobile-menu-close{align-self:flex-end;flex-shrink:0}
+ .app-sidebar{position:fixed;inset:0 auto 0 0;width:min(300px,85vw);height:100vh;height:100dvh;z-index:41;flex-direction:column;align-items:stretch;gap:12px;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom));overflow-y:auto;transform:translateX(-100%);visibility:hidden;transition:transform .2s,visibility .2s}
+ body.menu-open .app-sidebar{transform:translateX(0);visibility:visible}
+ .side-brand{padding:0 8px 12px}
+ .side-brand>div:last-child{display:block}
+ .side-nav{display:flex;flex-direction:column;flex:none;overflow:visible;gap:5px}
+ .side-link{padding:12px;gap:12px;font-size:14px;white-space:normal;min-height:46px}
+ .side-link span{display:inline}
+ .side-link .icon{width:20px;height:20px}
+ .side-status,.side-footer{display:block}
+ .side-status{display:flex;margin:0 7px 8px}
+ .mobile-backdrop{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45);border:0;width:100%;height:100%;padding:0}
+ body.menu-open .mobile-backdrop{display:block}
+ .hero-grid{grid-template-columns:minmax(0,1fr);gap:20px}
+ .hero-grid>*{min-width:0}
+ .hero-side{min-height:0;height:auto;padding:22px;justify-content:flex-start}
+ .section{scroll-margin-top:82px}
+}
+@media screen and (max-width:620px){
+ .wrap{padding-left:16px;padding-right:16px}
+ .hero{padding-top:24px}
+ .hero h1{font-size:clamp(30px,8.5vw,40px);line-height:1.1;letter-spacing:-1.2px;margin:14px 0 16px}
+ .lead{font-size:15px;line-height:1.65}
+ .eyebrow{font-size:10px;letter-spacing:.8px}
+ .statgrid,.grid2,.grid3,.checklist,.sim-layout,.decision{grid-template-columns:minmax(0,1fr)}
+ .stat{padding:18px}
+ .stat-value{font-size:28px;white-space:normal}
+ .card,.control-card,.result-card{padding:18px}
+ .sectionhead{align-items:flex-start;flex-wrap:wrap;gap:10px}
+ .sectionhead h2{font-size:25px}
+ .result-head{flex-wrap:wrap}
+ .result-grid{grid-template-columns:minmax(0,1fr)}
+ .three-mini{grid-template-columns:minmax(0,1fr)}
+ .mini b{font-size:23px;white-space:normal}
+ .sliderhead{gap:8px;align-items:flex-start;flex-wrap:wrap}
+ .sliderhead label{flex:1 1 160px;font-size:13px}
+ .public-share-hint{white-space:normal}
+ .kpi-line{flex-wrap:wrap}
+ .table-scroller{overscroll-behavior-x:contain}
+ .pill{max-width:100%;border-radius:16px}
+ .toolbar{gap:8px}
+ .topbar .btn{min-width:44px;min-height:44px}
+ .memory-card{height:auto}
+}
+@media(prefers-reduced-motion:reduce){.app-sidebar{transition:none}}
+
 </style>
 </head>
 <body>
@@ -55,7 +110,9 @@ body{padding-left:268px;background:var(--bg);font-size:14px}.app-sidebar{positio
  <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06-1.9 1.9-.06-.06A1.65 1.65 0 0 0 16 18.4a1.65 1.65 0 0 0-1 1.5V20h-3v-.1A1.65 1.65 0 0 0 11 18.4a1.65 1.65 0 0 0-1.82.33l-.06.06-1.9-1.9.06-.06A1.65 1.65 0 0 0 7.6 15a1.65 1.65 0 0 0-1.5-1H6v-3h.1A1.65 1.65 0 0 0 7.6 10a1.65 1.65 0 0 0-.33-1.82L7.2 8.1l1.9-1.9.06.06A1.65 1.65 0 0 0 11 6.6a1.65 1.65 0 0 0 1-1.5V5h3v.1A1.65 1.65 0 0 0 16 6.6a1.65 1.65 0 0 0 1.82-.33l.06-.06 1.9 1.9-.06.06A1.65 1.65 0 0 0 19.4 10a1.65 1.65 0 0 0 1.5 1h.1v3h-.1a1.65 1.65 0 0 0-1.5 1z"/></symbol>
 </svg>
 
-<aside class="app-sidebar" aria-label="Navegação do estudo">
+<button class="mobile-backdrop" tabindex="-1" aria-label="Fechar menu"></button>
+<aside id="studyMenu" class="app-sidebar" aria-label="Navegação do estudo">
+  <button class="btn mobile-menu-close" aria-label="Fechar menu">✕ Fechar</button>
   <div class="side-brand">
     <div class="side-mark"><svg class="icon"><use href="#i-bolt"/></svg></div>
     <div><strong>ON ROUTE</strong><span>Paranaguá · 80 kW</span></div>
@@ -74,7 +131,7 @@ body{padding-left:268px;background:var(--bg);font-size:14px}.app-sidebar{positio
   <div class="side-footer"><div class="side-footer-label">FOCO DO PROJETO</div><strong>Motoristas de aplicativo</strong><span>Recarga rápida, local seguro e operação simples.</span></div>
 </aside>
 
-<header class="topbar"><div class="wrap top-inner"><div class="logo"><div class="logo-emblem"><svg class="icon"><use href="#i-bolt"/></svg></div><div><strong>PROJETO ELETROPOSTO</strong><span class="subname">Paranaguá / PR · Painel de decisão</span></div></div><div class="toolbar"><button id="themeToggle" class="btn" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro"><svg class="icon" id="themeIcon"><use href="#i-moon"/></svg><span class="text-button" id="themeLabel">Tema escuro</span></button><button id="printBtn" class="btn" title="Imprimir ou salvar em PDF"><svg class="icon"><use href="#i-printer"/></svg><span class="text-button">Salvar PDF</span></button></div></div></header>
+<header class="topbar"><div class="wrap top-inner"><button class="btn mobile-menu-toggle" aria-controls="studyMenu" aria-expanded="false"><span aria-hidden="true">☰</span> Menu</button><div class="logo"><div class="logo-emblem"><svg class="icon"><use href="#i-bolt"/></svg></div><div><strong>PROJETO ELETROPOSTO</strong><span class="subname">Paranaguá / PR · Painel de decisão</span></div></div><div class="toolbar"><button id="themeToggle" class="btn" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro"><svg class="icon" id="themeIcon"><use href="#i-moon"/></svg><span class="text-button" id="themeLabel">Tema escuro</span></button><button id="printBtn" class="btn" title="Imprimir ou salvar em PDF"><svg class="icon"><use href="#i-printer"/></svg><span class="text-button">Salvar PDF</span></button></div></div></header>
 <div class="wrap"><nav class="mobile-nav" aria-label="Navegação"><a href="#visao">Visão geral</a><a href="#cenarios">4 cenários</a><a href="#simulador">Simulador financeiro</a><a href="#demanda">Simulador de demanda</a><a href="#equipamento">Equipamento</a><a href="#riscos">Riscos e decisões</a></nav></div>
 <main>
 <section class="hero wrap" id="visao"><div class="hero-grid"><div><div class="eyebrow"><svg class="icon tiny"><use href="#i-chart"/></svg> Análise pré-investimento · 15/10/2026</div><h1>Um eletroposto de <em>80 kW</em> para transformar tempo em receita.</h1><p class="lead">Proposta de implantação em Paranaguá, com foco inicial em motoristas de aplicativo. O conceito é promissor, mas a decisão deve depender da comprovação da demanda pagante, do custo real da energia e da viabilidade de conexão elétrica.</p><div class="pills"><span class="pill good"><svg class="icon tiny"><use href="#i-check"/></svg> Tese comercial coerente</span><span class="pill warn"><svg class="icon tiny"><use href="#i-alert"/></svg> Demanda ainda não comprovada</span><span class="pill"><svg class="icon tiny"><use href="#i-plug"/></svg> Carregador DC / CCS2</span></div></div><aside class="panel hero-side"><div class="big-score"><svg class="icon"><use href="#i-activity"/></svg> POSIÇÃO EXECUTIVA</div><h2>Avançar na validação.<br>Não aprovar o CAPEX ainda.</h2><p>Boa oportunidade para testar um ponto de recarga rápida, preferencialmente com investimento escalonado. A meta de 330 kWh/dia precisa ser sustentada por evidências, não apenas pela energia total consumida pela frota.</p><div class="note warning"><strong>Decisão prioritária:</strong> medir recargas reais disponíveis no ponto proposto e obter orçamento formal de conexão da Copel.</div></aside></div></section>
@@ -188,6 +245,34 @@ let initialTheme='light';try{initialTheme=localStorage.getItem('ev-paranagua-the
   links.forEach(link => link.addEventListener('click', () => {
     links.forEach(item => item.classList.toggle('active', item === link));
   }));
+})();
+</script>
+
+<script>
+(() => {
+ const toggle=document.querySelector('.mobile-menu-toggle'), menu=document.getElementById('studyMenu');
+ const close=document.querySelector('.mobile-menu-close'), media=matchMedia('(max-width:970px)');
+ function setOpen(open,restore=true){
+  document.body.classList.toggle('menu-open',open);
+  toggle.setAttribute('aria-expanded',String(open));
+  menu.inert=media.matches&&!open;
+  if(open) close.focus(); else if(restore&&media.matches) toggle.focus();
+ }
+ toggle.addEventListener('click',()=>setOpen(!document.body.classList.contains('menu-open')));
+ close.addEventListener('click',()=>setOpen(false));
+ document.querySelector('.mobile-backdrop').addEventListener('click',()=>setOpen(false));
+ menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+ document.addEventListener('keydown',e=>{
+  if(!document.body.classList.contains('menu-open'))return;
+  if(e.key==='Escape')setOpen(false);
+  if(e.key==='Tab'){
+   const items=[...menu.querySelectorAll('button,a[href]')],first=items[0],last=items[items.length-1];
+   if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  }
+ });
+ media.addEventListener('change',()=>setOpen(false,false));
+ setOpen(false,false);
 })();
 </script>
 </body></html>
